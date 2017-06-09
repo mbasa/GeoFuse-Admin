@@ -1,0 +1,28 @@
+TITLE=マーカーレイヤ管理
+
+#:::::::::::::::::::::::
+#:: Marker Layers Table
+#:::::::::::::::::::::::
+MARKER_TABLE=マーカーレイヤ
+LAYER_DEL_BTN=レイヤ削除
+LAYER_COL_NAME=レイヤ名
+DELETE_LAYER_MSG=レイヤを削除します
+
+#:::::::::::::::::::::::
+#:: Marker CSV Upload
+#:::::::::::::::::::::::
+MARKER_UPLOAD=CSVのマーカーデータをアップロード
+LAYERNAME_TXTBOX=レイヤ名
+CSV_TXTBOX=CSVアップロード（CSV内にx,y座標がそれぞれ設定されている"Lon" 及び "Lat" というカラム名が必須です）
+UPLOAD_BTN=データをアップロード
+
+#:::::::::::::::::::::::
+#:: Error Messages
+#:::::::::::::::::::::::
+ERR_SHORT_INPUT=入力されたデータは短かすぎます
+ERR_CSV_PARSE=エラー： CSVからのデータ取り出しがうまく行きませんでした
+ERR_NO_LATLON=エラー： LatまたはLonという名前のカラムがありません 
+
+
+
+
