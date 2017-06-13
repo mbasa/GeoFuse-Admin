@@ -11,6 +11,7 @@ import geotheme.geofuse_admin.sub_views.BaseMapView;
 import geotheme.geofuse_admin.sub_views.MapLinkerDataView;
 import geotheme.geofuse_admin.sub_views.MapLinkerView;
 import geotheme.geofuse_admin.sub_views.MarkerUploadView;
+import geotheme.geofuse_admin.sub_views.MetaDataView;
 import geotheme.geofuse_admin.sub_views.OverlayLayerView;
 import geotheme.geofuse_admin.sub_views.UserInfView;
 
@@ -96,13 +97,14 @@ public class MainView extends HorizontalLayout {
         
         navigator.addView(MarkerUploadView.NAME ,MarkerUploadView.class);
         navigator.addView(BaseMapView.NAME      ,BaseMapView.class);
+        navigator.addView(MetaDataView.NAME     ,MetaDataView.class);
         navigator.addView(OverlayLayerView.NAME ,OverlayLayerView.class);
         navigator.addView(MapLinkerView.NAME    ,MapLinkerView.class);
         navigator.addView(UserInfView.NAME      ,UserInfView.class);
         navigator.addView(MapLinkerDataView.NAME,MapLinkerDataView.class);
         
-        navigator.navigateTo(MarkerUploadView.NAME);
-        navigator.setErrorView(MarkerUploadView.class);
+        navigator.navigateTo(MapLinkerView.NAME);
+        navigator.setErrorView(MapLinkerView.class);
     }
 
     private CssLayout buildMenu( final ResourceBundle rb ) {
@@ -136,12 +138,13 @@ public class MainView extends HorizontalLayout {
         /*
         menuItems.put(UserSettingsView.NAME     , rb.getString("MENU.SETTINGS"));
         */
-        menuItems.put( MarkerUploadView.NAME , "MarkersUpload" );
+        menuItems.put( MapLinkerView.NAME    , "MapLinkerLayer");
         menuItems.put( BaseMapView.NAME      , "BaseMap" );
         menuItems.put( OverlayLayerView.NAME , "OverlayLayer");
-        menuItems.put( MapLinkerView.NAME    , "MapLinkerLayer");
+        menuItems.put( MarkerUploadView.NAME , "MarkersUpload" );
+        menuItems.put( UserInfView.NAME      , "UserAdmin");        
         menuItems.put( MapLinkerDataView.NAME, "MapLinkerData");
-        menuItems.put( UserInfView.NAME      , "UserAdmin");
+        menuItems.put( MetaDataView.NAME     , "MetaData" );        
         
         final Button buttons[] = new Button[menuItems.size()];
 
@@ -194,7 +197,7 @@ public class MainView extends HorizontalLayout {
         menu.addComponent(menuItemsLayout);
 
         int count = 0;
-        int icon  = 85;
+        int icon  = 87;
 
         List<FontAwesome> ICONS = Collections.unmodifiableList(Arrays
                 .asList(FontAwesome.values()));
