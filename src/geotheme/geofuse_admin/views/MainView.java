@@ -8,6 +8,7 @@
 package geotheme.geofuse_admin.views;
 
 import geotheme.geofuse_admin.sub_views.BaseMapView;
+import geotheme.geofuse_admin.sub_views.InstallationView;
 import geotheme.geofuse_admin.sub_views.MapLinkerDataView;
 import geotheme.geofuse_admin.sub_views.MapLinkerView;
 import geotheme.geofuse_admin.sub_views.MarkerUploadView;
@@ -102,6 +103,7 @@ public class MainView extends HorizontalLayout {
         navigator.addView(MapLinkerView.NAME    ,MapLinkerView.class);
         navigator.addView(UserInfView.NAME      ,UserInfView.class);
         navigator.addView(MapLinkerDataView.NAME,MapLinkerDataView.class);
+        navigator.addView(InstallationView.NAME ,InstallationView.class);
         
         navigator.navigateTo(MapLinkerView.NAME);
         navigator.setErrorView(MapLinkerView.class);
@@ -144,7 +146,8 @@ public class MainView extends HorizontalLayout {
         menuItems.put( MarkerUploadView.NAME , "MarkersUpload" );
         menuItems.put( UserInfView.NAME      , "UserAdmin");        
         menuItems.put( MapLinkerDataView.NAME, "MapLinkerData");
-        menuItems.put( MetaDataView.NAME     , "MetaData" );        
+        menuItems.put( MetaDataView.NAME     , "MetaData" );  
+        menuItems.put( InstallationView.NAME , "Help" );  
         
         final Button buttons[] = new Button[menuItems.size()];
 
