@@ -13,10 +13,7 @@ ul.toc li.heading3 { margin-left: 2em; }
 a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
 a.wiki-anchor:hover { color: #aaa !important; text-decoration: none; }
 h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display: inline; color: #ddd; }
-img {
-   width: 80%;
-   height: auto;
-}
+
 </style>
 </head>
 <body>
@@ -58,7 +55,7 @@ img {
     </ul>
 
 
-<pre style="display: inline-block; border:1px solid Gray;">
+<pre style="display: inline-block; border:1px solid Gray; color: #6666ff; background-color:#eeeeee;">
 createdb -U postgres geofuse
 </pre>
 
@@ -67,7 +64,7 @@ createdb -U postgres geofuse
     </ul>
 
 
-<pre style="display: inline-block; border:1px solid Gray;">
+<pre style="display: inline-block; border:1px solid Gray; color: #6666ff; background-color:#eeeeee;">
 geofuse=# create extention postgis;
 geofuse=# create extention postgis_topology;
 </pre>
@@ -77,7 +74,7 @@ geofuse=# create extention postgis_topology;
     </ul>
 
 
-<pre style="display: inline-block; border:1px solid Gray;">
+<pre style="display: inline-block; border:1px solid Gray; color: #6666ff; background-color:#eeeeee;">
 geofuse=# \i &lt;TOMCAT_DIR&gt;/webapps/geofuse/WEB-INF/classes/sql/createtabs.sql
 </pre>
 
@@ -86,7 +83,7 @@ geofuse=# \i &lt;TOMCAT_DIR&gt;/webapps/geofuse/WEB-INF/classes/sql/createtabs.s
     </ul>
 
 
-<pre style="display: inline-block; border:1px solid Gray;"><code class="sql syntaxhl"><span class="CodeRay">geofuse=<span class="comment"># \i &lt;TOMCAT_DIR&gt;/webapps/geofuse/WEB-INF/classes/sql/deltemp.sql</span>
+<pre style="display: inline-block; border:1px solid Gray; color: #6666ff; background-color:#eeeeee;"><code class="sql syntaxhl"><span class="CodeRay">geofuse=<span class="comment"># \i &lt;TOMCAT_DIR&gt;/webapps/geofuse/WEB-INF/classes/sql/deltemp.sql</span>
 </span></code></pre>
 
     <ul>
@@ -126,15 +123,15 @@ geofuse=# \i &lt;TOMCAT_DIR&gt;/webapps/geofuse/WEB-INF/classes/sql/createtabs.s
     </ul>
 
 
-<pre style="display: inline-block; border:1px solid Gray;"><code class="sql syntaxhl"><span class="CodeRay"><span class="class">select</span> a.*,the_geom <span class="keyword">from</span> %linktab% a,%maptab% b <span class="keyword">where</span> a.col0 = b.%mapcol%
-</span></code><br /></pre>
+<pre style="display: inline-block; border:1px solid Gray; color: #6666ff; background-color:#eeeeee;">select a.*,the_geom from %linktab% a,%maptab% b where a.col0 = b.%mapcol%
+</pre>
 
     <ul>
     <li>Set the View Parameters to the values below and erase the values of the <strong>Validation regular expression (正規表現を検証)</strong></li>
     </ul>
 
 
-<pre style="display: inline-block; border:1px solid Gray;">
+<pre style="display: inline-block; border:1px solid Gray; color: #6666ff; background-color:#eeeeee;">
 linktab = geodata.dummy
 maptab  = geodata.mapdummy
 mapcol  = mapcol
@@ -164,7 +161,7 @@ mapcol  = mapcol
     </ul>
 
 
-<pre style="display: inline-block; border:1px solid Gray;"><code class="sql syntaxhl"><span class="CodeRay"><span class="class">select</span> * <span class="keyword">from</span> %linktab%
+<pre style="display: inline-block; border:1px solid Gray; color: #6666ff; background-color:#eeeeee;"><code class="sql syntaxhl"><span class="CodeRay"><span class="class">select</span> * <span class="keyword">from</span> %linktab%
 </span></code></pre>
 
     <ul>
@@ -172,7 +169,7 @@ mapcol  = mapcol
     </ul>
 
 
-<pre style="display: inline-block; border:1px solid Gray;">
+<pre style="display: inline-block; border:1px solid Gray; color: #6666ff; background-color:#eeeeee;">
 linktab = geodata.dummy_pt
 </pre>
 
