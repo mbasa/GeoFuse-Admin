@@ -7,6 +7,8 @@
  */
 package geotheme.geofuse_admin.views;
 
+import java.util.ResourceBundle;
+
 import geotheme.geofuse_admin.db.DBTools;
 
 import com.vaadin.server.Page;
@@ -22,6 +24,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ValoTheme;
@@ -36,6 +39,10 @@ public class LoginView extends VerticalLayout {
      * 
      */
     private static final long serialVersionUID = 1L;
+    private ResourceBundle rb = ResourceBundle.getBundle( 
+            "properties/lang/LoginView",
+            UI.getCurrent().getSession().getLocale()
+          );
 
     /**
      * コンストラクタ
@@ -49,7 +56,7 @@ public class LoginView extends VerticalLayout {
         ThemeResource tr = new ThemeResource("graphics/Faviicon32x32.png");
         Image logo  = new Image(null,tr);
         
-        Label title = new Label("GeoFuse Admin Console");
+        Label title = new Label( rb.getString( "TITLE" ));
         title.setStyleName(ValoTheme.LABEL_H2);
         
         HorizontalLayout tlayout = new HorizontalLayout();
@@ -57,15 +64,15 @@ public class LoginView extends VerticalLayout {
         tlayout.setComponentAlignment(logo , Alignment.TOP_LEFT);
         tlayout.setComponentAlignment(title, Alignment.MIDDLE_CENTER);
         
-        final TextField user = new TextField("Username");
-        final PasswordField pass = new PasswordField("Password");
+        final TextField user = new TextField( rb.getString("USERNAME") );
+        final PasswordField pass = new PasswordField( rb.getString("PASSWORD") );
         
         user.setWidth("80%");
         pass.setWidth("80%");
         user.addStyleName(ValoTheme.TEXTFIELD_SMALL);
         pass.addStyleName(ValoTheme.TEXTFIELD_SMALL);        
         
-        Button submitBtn = new Button("Submit");
+        Button submitBtn = new Button( rb.getString("BTN.SUBMIT") );
         submitBtn.addStyleName(ValoTheme.BUTTON_SMALL);
               
         form.addComponents(user,pass);

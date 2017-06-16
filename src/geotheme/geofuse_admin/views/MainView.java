@@ -55,8 +55,12 @@ public class MainView extends HorizontalLayout {
      * 
      */
     private static final long serialVersionUID = 1L;
-    private Logger LOGGER       = LogManager.getLogger();
     private Navigator navigator = null;
+    private Logger LOGGER       = LogManager.getLogger();
+    private ResourceBundle rb   = ResourceBundle.getBundle( 
+            "properties/lang/MainView",
+            UI.getCurrent().getSession().getLocale()
+          );
 
     /**
      * コンストラクタ
@@ -91,7 +95,7 @@ public class MainView extends HorizontalLayout {
         
         Responsive.makeResponsive(this);
         
-        menuLayout.addComponent( buildMenu( null ) );
+        menuLayout.addComponent( buildMenu( rb ) );
         
         ComponentContainer viewDisplay = contentLayout;
         navigator = new Navigator(UI.getCurrent(),viewDisplay);
@@ -137,17 +141,14 @@ public class MainView extends HorizontalLayout {
         menu.addComponent(showMenu);
 
         // Add items
-        /*
-        menuItems.put(UserSettingsView.NAME     , rb.getString("MENU.SETTINGS"));
-        */
-        menuItems.put( MapLinkerView.NAME    , "MapLinkerLayer");
-        menuItems.put( BaseMapView.NAME      , "BaseMap" );
-        menuItems.put( OverlayLayerView.NAME , "OverlayLayer");
-        menuItems.put( MarkerUploadView.NAME , "MarkersUpload" );
-        menuItems.put( UserInfView.NAME      , "UserAdmin");        
-        menuItems.put( MapLinkerDataView.NAME, "MapLinkerData");
-        menuItems.put( MetaDataView.NAME     , "MetaData" );  
-        menuItems.put( InstallationView.NAME , "Help" );  
+        menuItems.put( MapLinkerView.NAME    , rb.getString("MENU.MAPLINKERLAYER") );
+        menuItems.put( BaseMapView.NAME      , rb.getString("MENU.BASEMAP") );
+        menuItems.put( OverlayLayerView.NAME , rb.getString("MENU.OVERLAYLAYER") );
+        menuItems.put( MarkerUploadView.NAME , rb.getString("MENU.MARKERSUPLOAD") );
+        menuItems.put( UserInfView.NAME      , rb.getString("MENU.USERADMIN") );        
+        menuItems.put( MapLinkerDataView.NAME, rb.getString("MENU.MAPLINKERDATA") );
+        menuItems.put( MetaDataView.NAME     , rb.getString("MENU.METADATA") );  
+        menuItems.put( InstallationView.NAME , rb.getString("MENU.HELP") );  
         
         final Button buttons[] = new Button[menuItems.size()];
 
@@ -185,15 +186,15 @@ public class MainView extends HorizontalLayout {
                 /**
                  * Logging Out
                  */
-                if( selectedItem.getText().equalsIgnoreCase( "Logout" ) ) {
-                        //rb.getString("LOGOUT_BTN") ) ){
+                if( selectedItem.getText().equalsIgnoreCase( 
+                        rb.getString("LOGOUT_BTN") ) ){
                     getSession().close();
                     Page.getCurrent().reload();
                 }
             }
         };
 
-        settingsItem.addItem( "Logout", null,command);
+        settingsItem.addItem( rb.getString("LOGOUT_BTN"), null,command);
         menu.addComponent(settings);
 
         menuItemsLayout.setPrimaryStyleName("valo-menuitems");

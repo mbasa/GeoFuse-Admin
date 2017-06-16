@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import geotheme.geofuse_admin.db.ConnectionPoolHolder;
 import geotheme.geofuse_admin.db.DBTools;
 import geotheme.geofuse_admin.db_beans.LinkColBean;
+
 import com.vaadin.data.Item;
 import com.vaadin.data.util.filter.Compare;
 import com.vaadin.data.util.filter.Not;
@@ -42,6 +44,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Table.RowHeaderMode;
 import com.vaadin.ui.themes.ValoTheme;
@@ -62,7 +65,12 @@ public class MapLinkerDataView extends VerticalLayout implements View {
     private static final long serialVersionUID = 1L;
     public static final String NAME = "MapLinkerDataView";
     
-    private Logger LOGGER = LogManager.getLogger();
+    private Logger LOGGER     = LogManager.getLogger();
+    private ResourceBundle rb = ResourceBundle.getBundle( 
+            "properties/lang/MapLinkerDataView",
+            UI.getCurrent().getSession().getLocale()
+          );
+
 
     /**
      * コンストラクタ
@@ -81,7 +89,7 @@ public class MapLinkerDataView extends VerticalLayout implements View {
         ThemeResource tr = new ThemeResource("graphics/Favicon16x16.png");
         Image logo  = new Image(null,tr);
 
-        Label header = new Label( "Map Linker Data" );
+        Label header = new Label( rb.getString("TITLE") );
         header.addStyleName(ValoTheme.LABEL_H1);
         header.addStyleName(ValoTheme.LABEL_NO_MARGIN);
         header.setSizeUndefined();
@@ -91,7 +99,7 @@ public class MapLinkerDataView extends VerticalLayout implements View {
         tlayout.setComponentAlignment(logo  , Alignment.TOP_LEFT);
         tlayout.setComponentAlignment(header, Alignment.MIDDLE_CENTER);
 
-        Label desc_title = new Label("Linkable Tables and Columns");
+        Label desc_title = new Label( rb.getString("TABLE") );
         desc_title.addStyleName(ValoTheme.LABEL_H2);
         desc_title.addStyleName(ValoTheme.LABEL_COLORED);
         desc_title.setSizeUndefined();
@@ -142,7 +150,7 @@ public class MapLinkerDataView extends VerticalLayout implements View {
             baseTable.select( baseTable.getItemIds().iterator().next()  );
         }
         
-        Button exportBtn = new Button("Export to Excel File");
+        Button exportBtn = new Button( rb.getString("BTN.EXPORT") );
         
         HorizontalLayout btnLayout = new HorizontalLayout();
         btnLayout.setSpacing(true);

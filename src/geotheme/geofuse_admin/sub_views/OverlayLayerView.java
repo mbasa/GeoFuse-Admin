@@ -8,6 +8,8 @@
 package geotheme.geofuse_admin.sub_views;
 
 
+import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,6 +37,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Table.RowHeaderMode;
@@ -52,8 +55,12 @@ public class OverlayLayerView extends VerticalLayout implements View {
     private static final long serialVersionUID = 1L;
     public static final String NAME = "OverlayLayerView";
     
-    private Logger LOGGER = LogManager.getLogger();
-
+    private Logger LOGGER     = LogManager.getLogger();
+    private ResourceBundle rb = ResourceBundle.getBundle( 
+            "properties/lang/OverlayLayerView",
+            UI.getCurrent().getSession().getLocale()
+          );
+    
     /**
      * コンストラクタ
      *
@@ -71,7 +78,7 @@ public class OverlayLayerView extends VerticalLayout implements View {
         ThemeResource tr = new ThemeResource("graphics/Favicon16x16.png");
         Image logo  = new Image(null,tr);
         
-        Label header = new Label( "OverlayLayer Administration" );
+        Label header = new Label( rb.getString("TITLE") );
         header.addStyleName(ValoTheme.LABEL_H1);
         header.addStyleName(ValoTheme.LABEL_NO_MARGIN);
         header.setSizeUndefined();
@@ -81,18 +88,18 @@ public class OverlayLayerView extends VerticalLayout implements View {
         tlayout.setComponentAlignment(logo  , Alignment.TOP_LEFT);
         tlayout.setComponentAlignment(header, Alignment.MIDDLE_CENTER);
 
-        Label desc_title = new Label("Table Definition");
+        Label desc_title = new Label( rb.getString("TABLE_DEFINITION") );
         desc_title.addStyleName(ValoTheme.LABEL_H2);
         desc_title.addStyleName(ValoTheme.LABEL_COLORED);
         desc_title.setSizeUndefined();
         
         Label desc = new Label();
         desc.setContentMode(ContentMode.HTML);
-        desc.setValue("<ul><li>Name : Overlay Layer Name</li><li>Rank : Display Order in Layer Control</li><li>Display : Display in Layer Control or Not</li><li>Active : Display on Startup or Not</li><li>Url : WMS URL (example: /geofuse/wms)</li><li>Layers : WMS Layer(s)</li><li>MinZoom : Minimum Display Zoom Level</li></ul>");
+        desc.setValue( rb.getString("HTML_MSG") );
         desc.addStyleName(ValoTheme.LABEL_SMALL);        
         desc.setSizeUndefined();
 
-        Label tab_title = new Label("Table");
+        Label tab_title = new Label( rb.getString("TABLE") );
         tab_title.addStyleName(ValoTheme.LABEL_H2);
         tab_title.addStyleName(ValoTheme.LABEL_COLORED);
         tab_title.setSizeUndefined();
@@ -111,9 +118,9 @@ public class OverlayLayerView extends VerticalLayout implements View {
         
     }
 
-    private final Button addBtn  = new Button("Add");
-    private final Button editBtn = new Button("Edit");
-    private final Button delBtn  = new Button("Delete");
+    private final Button addBtn  = new Button( rb.getString("BTN.ADD") );
+    private final Button editBtn = new Button( rb.getString("BTN.EDIT") );
+    private final Button delBtn  = new Button( rb.getString("BTN.DEL") );
     
     private void setupTable() {
         
