@@ -143,6 +143,13 @@ public class TableEditWin extends Window {
                     }
                 }
                 
+                /**
+                 * Setting InputPrompts
+                 */                
+                if( cols[i].length > 3 &&  cols[i][3] != null ) {
+                    text.setInputPrompt( cols[i][3] );
+                }
+                
                 form.addComponent(text);        
                 components.add(text); 
             }

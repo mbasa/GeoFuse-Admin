@@ -263,9 +263,9 @@ public class MapLinkerView extends VerticalLayout implements View {
         }
         
         String cols[][] = {
-                {"MapName"  ,"text",  "NotNull"},
-                {"ColName"  ,"text",  "NotNull"},
-                {"LayerName","text",  "NotNull"},
+                {"MapName"  ,"text",  "NotNull","ex: geodata.world_countries"},
+                {"ColName"  ,"text",  "NotNull","ex: country_name"},
+                {"LayerName","text",  "NotNull","ex: geofuse:geolink or geofuse:geolink_pt"},
                 {"MapType"  ,"combo", null,"polygon,line,point"}
         };
         
