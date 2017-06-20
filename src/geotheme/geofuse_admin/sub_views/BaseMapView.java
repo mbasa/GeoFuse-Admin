@@ -267,12 +267,12 @@ public class BaseMapView extends VerticalLayout implements View {
         }
         
         String cols[][] = {
-                {"Name","text","NotNull"},
-                {"Rank","int","Integer"},
-                {"Display","boolean",null},
-                {"URL","text","NotNull"},
-                {"SubDomain","text",null},
-                {"Attribution","text",null}
+                {"Name","text","NotNull","ex: OSM"},
+                {"Rank","int","Integer","ex: 1"},
+                {"Display","boolean",null,null},
+                {"URL","text","NotNull","ex: http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"},
+                {"SubDomain","text",null,"ex: a,b,c,d"},
+                {"Attribution","text",null,"ex: © OpenStreetMap Contributors"}
         };
         
         TableEditWin blw = new TableEditWin();

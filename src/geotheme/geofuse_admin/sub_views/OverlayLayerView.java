@@ -266,13 +266,13 @@ public class OverlayLayerView extends VerticalLayout implements View {
         }
 
         String cols[][] = {
-                {"Name","text","NotNull"},
-                {"Rank","text","Integer"},
-                {"Display","boolean",null},
-                {"Active","boolean",null},
-                {"URL","text","NotNull"},
-                {"Layers","text","NotNull"},
-                {"Minzoom","text","Integer"}
+                {"Name","text","NotNull","ex: DRM Layer"},
+                {"Rank","text","Integer","ex: 1"},
+                {"Display","boolean",null,null},
+                {"Active","boolean",null,null},
+                {"URL","text","NotNull","ex: /geofuse/wms"},
+                {"Layers","text","NotNull","ex: drm:drmroad32"},
+                {"Minzoom","text","Integer","ex: 14"}
         };
         
         TableEditWin blw = new TableEditWin();

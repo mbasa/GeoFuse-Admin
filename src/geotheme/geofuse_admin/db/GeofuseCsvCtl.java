@@ -98,7 +98,11 @@ public class GeofuseCsvCtl {
         sb.append("?)");
         
         String arr[][] = Arrays.copyOfRange(pStr, 1, pStr.length);
-        update(sb.toString(),arr);
+        int retval[]   = update(sb.toString(),arr);
+        
+        if( retval == null ) {
+            tableName = "Error: Parsing CSV";
+        }
         
         return tableName;
     }
@@ -119,6 +123,7 @@ public class GeofuseCsvCtl {
             con.commit();
         }
         catch( Exception e ) {
+            retval = null;
             LOGGER.error( e );
         }
         finally {
