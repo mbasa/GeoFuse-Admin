@@ -216,7 +216,7 @@ public class MarkerUploadView extends VerticalLayout implements View {
         titleIn.setWidth("40%");
         titleIn.setInputPrompt("ex: Municipal Hospitals");
         csvIn.setWidth("100%");
-        csvIn.setInputPrompt("ex: Hospital,NumBeds,Lon,Lat\nHeisei Hospital,300,135.5,35,5");        
+        csvIn.setInputPrompt("ex: Hospital,NumBeds,Lon,Lat\nHeisei Hospital,300,135.5,35.5");        
         
         titleIn.addValidator(new StringLengthValidator(
                 rb.getString("ERR_SHORT_INPUT"),1,null,false) );
