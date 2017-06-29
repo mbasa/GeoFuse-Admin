@@ -105,7 +105,7 @@ public class MetaDataView extends VerticalLayout implements View {
         
     }
 
-    private final String geofuseURL = "/geofuse/ui/showtheme?layer=";
+    private final String geofuseURL = rb.getString("GEOFUSE_URL");
     
     private final Button delBtn = new Button( rb.getString("BTN.DEL") );
     private final Button vueBtn = new Button( rb.getString("BTN.VIEW") );
