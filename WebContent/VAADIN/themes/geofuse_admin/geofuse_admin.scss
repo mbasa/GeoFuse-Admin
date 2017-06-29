@@ -64,6 +64,14 @@ $valo-menu-background-color: #eee;
     color: brown;
   }
   
+  .v-table-header {
+    background-color: #f7f7eb;
+  }
+  
+  .v-customlayout h1, .v-customlayout h2 {
+    color: $v-focus-color;
+    margin-top: 0.5em;
+  }
   .v-label-h2 {
     margin-top: 0.8em;
     margin-bottom: 0em;
