@@ -18,6 +18,7 @@ import geotheme.geofuse_admin.windows.TableEditWin;
 import geotheme.geofuse_admin.windows.ConfirmWin;
 
 import com.vaadin.data.Item;
+import com.vaadin.data.Property;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.data.util.sqlcontainer.query.TableQuery;
 import com.vaadin.data.util.sqlcontainer.query.generator.DefaultSQLGenerator;
@@ -124,10 +125,27 @@ public class OverlayLayerView extends VerticalLayout implements View {
     
     private void setupTable() {
         
-        final Table baseTable = new Table();
         final TableQuery tq   = new TableQuery(null,"geofuse","overlaylayer",
                 ConnectionPoolHolder.getConnectionPool(), 
                 new DefaultSQLGenerator() );
+
+        final Table baseTable = new Table() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected String formatPropertyValue(Object rowId, Object colId, 
+                    Property<?> property) {
+                if( property.getValue() instanceof Boolean ) {
+                    if( (Boolean)property.getValue() ) {
+                        return "On";
+                    }
+                    else {
+                        return "Off";
+                    }
+                }
+                return super.formatPropertyValue(rowId, colId, property);
+            }  
+        };
 
         try{
             SQLContainer sqlContainer = new SQLContainer( tq );
