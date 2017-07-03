@@ -31,6 +31,7 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
@@ -102,13 +103,107 @@ public class MetaDataView extends VerticalLayout implements View {
         this.setSizeFull();
         this.addComponents(tlayout,descLayout);
         this.setupTable();
-        
+        this.setupMultDel();
     }
 
     private final String geofuseURL = rb.getString("GEOFUSE_URL");
     
     private final Button delBtn = new Button( rb.getString("BTN.DEL") );
     private final Button vueBtn = new Button( rb.getString("BTN.VIEW") );
+    
+    private SQLContainer sqlContainer = null;
+    
+    private void setupMultDel() {
+        Label label = new Label( rb.getString("DEL_OLD_RECS") );
+        label.addStyleName(ValoTheme.LABEL_BOLD);
+        label.addStyleName(ValoTheme.LABEL_NO_MARGIN);
+        
+        final ComboBox multDel = new ComboBox();
+        multDel.setNullSelectionAllowed(false);
+        multDel.setNewItemsAllowed(false);
+        multDel.setTextInputAllowed(false);
+        
+        multDel.addItem("1 Week");
+        multDel.addItem("1 Month");
+        multDel.addItem("6 Months");
+        multDel.addItem("12 Months");
+        multDel.addItem("18 Months");
+        multDel.addItem("24 Months");
+        
+        multDel.setItemCaption( "1 Week"   , rb.getString("DEL_ONE_WEEK") );
+        multDel.setItemCaption( "1 Month"  , rb.getString("DEL_ONE_MONTH") );
+        multDel.setItemCaption( "6 Months" , rb.getString("DEL_SIX_MONTHS") );
+        multDel.setItemCaption( "12 Months", rb.getString("DEL_TWELVE_MONTHS") );
+        multDel.setItemCaption( "18 Months", rb.getString("DEL_EIGHTEEN_MONTHS") );
+        multDel.setItemCaption( "24 Months", rb.getString("DEL_TWENTYFOUR_MONTHS") );
+        
+        multDel.setValue("6 Months");
+        multDel.addStyleName(ValoTheme.COMBOBOX_SMALL);
+        
+        Button mdelBtn = new Button( rb.getString("BTN.DEL") );
+        delBtn.addStyleName(ValoTheme.BUTTON_SMALL);
+        
+        HorizontalLayout form = new HorizontalLayout();
+        form.addComponents(label,multDel,mdelBtn);
+        form.setSizeUndefined();
+        form.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
+        form.setSpacing(true);
+        
+        this.addComponent( form );
+        this.setExpandRatio( form, 2.0f );
+        
+        mdelBtn.addClickListener(new ClickListener() {
+            
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void buttonClick(ClickEvent event) {
+                LOGGER.debug( "Deleing records older than {} ",multDel.getValue() );
+             
+                final ConfirmWin cw = new ConfirmWin();
+                
+                cw.setModal(true);
+                cw.setClosable(true);
+                cw.setResizable(false);
+                cw.setWidth("400px");
+                cw.setHeight("230px");               
+                cw.init( "Delete Records Older than "+multDel.getValue(),false);
+                
+                cw.ok.addClickListener(new ClickListener() {
+
+                    private static final long serialVersionUID = 1L;
+
+                    @Override
+                    public void buttonClick(ClickEvent event) {
+                        
+                        try {
+                            /**
+                             * deleting records older than parameter
+                             */
+                            DBTools.callDelTemp( (String)multDel.getValue() );
+
+                            if( sqlContainer != null ) {
+                                LOGGER.debug("SqlContainer will be refreshed");
+                                sqlContainer.refresh();     
+                            }
+                            else {
+                                LOGGER.debug("SqlContainer is null.");
+                            }
+                        }
+                        catch( Exception e ) {
+                            LOGGER.error( e );
+                        }                
+                        finally {
+                            cw.closeWindow();
+                            vueBtn.setEnabled(false);
+                            delBtn.setEnabled(false);
+                        }
+                    }
+                });
+                getUI().addWindow(cw);                
+            }
+        });
+    }
     
     private void setupTable() {
         
@@ -118,7 +213,7 @@ public class MetaDataView extends VerticalLayout implements View {
                 new DefaultSQLGenerator() );
 
         try{
-            SQLContainer sqlContainer = new SQLContainer( tq );
+            sqlContainer = new SQLContainer( tq );
             sqlContainer.sort(new Object[] {"ddate"}, new boolean[] {false} );
 
             baseTable.setContainerDataSource(sqlContainer);
@@ -138,7 +233,13 @@ public class MetaDataView extends VerticalLayout implements View {
         baseTable.addStyleName(ValoTheme.TABLE_SMALL);
         baseTable.setVisibleColumns("layername","maptable","linkcolumn","ddate",
                 "layertype","colnames");
-                
+        baseTable.setColumnHeader( "layername" , rb.getString("COL_LAYERNAME") );
+        baseTable.setColumnHeader( "maptable"  , rb.getString("COL_MAPTABLE") );
+        baseTable.setColumnHeader( "linkcolumn", rb.getString("COL_LINKCOLUMN") );
+        baseTable.setColumnHeader( "ddate"     , rb.getString("COL_DDATE") );
+        baseTable.setColumnHeader( "layertype" , rb.getString("COL_LAYERTYPE") );
+        baseTable.setColumnHeader( "colnames"  , rb.getString("COL_COLNAMES") );
+        
         baseTable.addItemClickListener( new ItemClickListener() {
             
             private static final long serialVersionUID = 1L;
@@ -165,7 +266,7 @@ public class MetaDataView extends VerticalLayout implements View {
         this.addComponents(baseTable,btnLayout);
         this.setDeleteEvent(baseTable); 
         
-        this.setExpandRatio(baseTable, 2.0f);
+        this.setExpandRatio(baseTable, 4.0f);
         this.setExpandRatio(btnLayout, 1.0f);
     }
 
@@ -221,6 +322,7 @@ public class MetaDataView extends VerticalLayout implements View {
                         finally {
                             cw.closeWindow();
                             delBtn.setEnabled(false);
+                            vueBtn.setEnabled(false);
                         }
                     }
                 });

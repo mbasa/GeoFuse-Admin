@@ -142,8 +142,15 @@ public class MapLinkerView extends VerticalLayout implements View {
         baseTable.setNullSelectionAllowed(false);
         baseTable.setRowHeaderMode(RowHeaderMode.INDEX);
         baseTable.addStyleName(ValoTheme.TABLE_SMALL);
+        
         baseTable.setVisibleColumns("mapname","colname","layername",
                 "maptype");
+        
+        baseTable.setColumnHeader( "mapname"  , rb.getString("COL_MAPNAME") );
+        baseTable.setColumnHeader( "colname"  , rb.getString("COL_COLNAME") );
+        baseTable.setColumnHeader( "layername", rb.getString("COL_LAYERNAME") );
+        baseTable.setColumnHeader( "maptype"  , rb.getString("COL_MAPTYPE") );
+        
         baseTable.setSizeFull();
         
         baseTable.addItemClickListener( new ItemClickListener() {
@@ -261,12 +268,14 @@ public class MapLinkerView extends VerticalLayout implements View {
         if( item == null ) {
             item = baseTable.getItem( baseTable.addItem() );            
         }
-        
+        /**
+         * { disp name,col name,col type,validation,input prompt }
+         */
         String cols[][] = {
-                {"MapName"  ,"text",  "NotNull","ex: geodata.world_countries"},
-                {"ColName"  ,"text",  "NotNull","ex: country_name"},
-                {"LayerName","text",  "NotNull","ex: geofuse:geolink or geofuse:geolink_pt"},
-                {"MapType"  ,"combo", null,"polygon,line,point"}
+                {rb.getString("COL_MAPNAME"),"MapName"  ,"text",  "NotNull","ex: geodata.world_countries"},
+                {rb.getString("COL_COLNAME"),"ColName"  ,"text",  "NotNull","ex: country_name"},
+                {rb.getString("COL_LAYERNAME"),"LayerName","text",  "NotNull","ex: geofuse:geolink or geofuse:geolink_pt"},
+                {rb.getString("COL_MAPTYPE"),"MapType"  ,"combo", null,"polygon,line,point"}
         };
         
         TableEditWin blw = new TableEditWin();

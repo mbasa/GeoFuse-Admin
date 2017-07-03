@@ -138,10 +138,10 @@ public class BaseMapView extends VerticalLayout implements View {
                     Property<?> property) {
                 if( property.getValue() instanceof Boolean ) {
                     if( (Boolean)property.getValue() ) {
-                        return "On";
+                        return rb.getString("TBL_TRUE");
                     }
                     else {
-                        return "Off";
+                        return rb.getString("TBL_FALSE");
                     }
                 }
                 return super.formatPropertyValue(rowId, colId, property);
@@ -166,6 +166,13 @@ public class BaseMapView extends VerticalLayout implements View {
         baseTable.addStyleName(ValoTheme.TABLE_SMALL);
         baseTable.setVisibleColumns("name","rank","display","url",
                 "subdomain","attribution");
+
+        baseTable.setColumnHeader("name"       , rb.getString("COL_NAME"));
+        baseTable.setColumnHeader("rank"       , rb.getString("COL_RANK"));
+        baseTable.setColumnHeader("display"    , rb.getString("COL_DISPLAY"));
+        baseTable.setColumnHeader("url"        , rb.getString("COL_URL"));
+        baseTable.setColumnHeader("subddomain" , rb.getString("COL_SUBDOMAIN"));
+        baseTable.setColumnHeader("attribution", rb.getString("COL_ATTRIBUTION"));
         
         baseTable.addItemClickListener( new ItemClickListener() {
             
@@ -285,12 +292,15 @@ public class BaseMapView extends VerticalLayout implements View {
         }
         
         String cols[][] = {
-                {"Name","text","NotNull","ex: OSM"},
-                {"Rank","int","Integer","ex: 1"},
-                {"Display","boolean",null,null},
-                {"URL","text","NotNull","ex: http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"},
-                {"SubDomain","text",null,"ex: a,b,c,d"},
-                {"Attribution","text",null,"ex: © OpenStreetMap Contributors"}
+                /**
+                 * { disp name,col name,col type,validation,input prompt }
+                 */
+                {rb.getString("COL_NAME"),"Name","text","NotNull","ex: OSM"},
+                {rb.getString("COL_RANK"),"Rank","int","Integer","ex: 1"},
+                {rb.getString("COL_DISPLAY"),"Display","boolean",null,null},
+                {rb.getString("COL_URL"),"URL","text","NotNull","ex: http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"},
+                {rb.getString("COL_SUBDOMAIN"),"SubDomain","text",null,"ex: a,b,c,d"},
+                {rb.getString("COL_ATTRIBUTION"),"Attribution","text",null,"ex: © OpenStreetMap Contributors"}
         };
         
         TableEditWin blw = new TableEditWin();

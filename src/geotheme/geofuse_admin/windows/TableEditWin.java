@@ -78,13 +78,13 @@ public class TableEditWin extends Window {
         final ArrayList<TextField> components = new ArrayList<TextField>();
         
         for( int i=0; i < cols.length; i++ ) {
-            if( cols[i][1].equalsIgnoreCase("boolean") ) {
+            if( cols[i][2].equalsIgnoreCase("boolean") ) {
                 HorizontalLayout dispLayout = new HorizontalLayout();
                 dispLayout.setCaption( cols[i][0] );
                 
                 CheckBox cb = new CheckBox();
                 cb.setPropertyDataSource( 
-                        item.getItemProperty( cols[i][0].toLowerCase()) );
+                        item.getItemProperty( cols[i][1].toLowerCase()) );
                 
                 dispLayout.addComponent(cb);
                 dispLayout.setWidth("100%");
@@ -92,9 +92,9 @@ public class TableEditWin extends Window {
                 form.addComponent( dispLayout );
                 components.add(null);
             }
-            else if( cols[i][1].equalsIgnoreCase("combo") ) {
+            else if( cols[i][2].equalsIgnoreCase("combo") ) {
                 ComboBox cb  = new ComboBox( cols[i][0] );
-                String its[] = cols[i][3].split(",");
+                String its[] = cols[i][4].split(",");
                 
                 if( its != null ) {
                     for(String s : its ) {
@@ -106,7 +106,7 @@ public class TableEditWin extends Window {
                     cb.setNullSelectionAllowed(false);                                
 
                     cb.setPropertyDataSource( 
-                            item.getItemProperty( cols[i][0].toLowerCase() ) );
+                            item.getItemProperty( cols[i][1].toLowerCase() ) );
                     
                     if( cb.getValue() == null || 
                         cb.getValue().toString().length() == 0) {
@@ -119,7 +119,7 @@ public class TableEditWin extends Window {
             else {
                 TextField text = new TextField( cols[i][0] );
                 text.setPropertyDataSource( 
-                        item.getItemProperty( cols[i][0].toLowerCase() ) );
+                        item.getItemProperty( cols[i][1].toLowerCase() ) );
                 text.setNullRepresentation("");
                 text.setWidth("100%");
                 text.addStyleName(ValoTheme.TEXTFIELD_SMALL);
@@ -127,13 +127,13 @@ public class TableEditWin extends Window {
                 /**
                  * Setting Validators
                  */
-                if( cols[i][2] != null ) {
-                    if( cols[i][2].equalsIgnoreCase("NotNull") ) {
+                if( cols[i][3] != null ) {
+                    if( cols[i][3].equalsIgnoreCase("NotNull") ) {
                         text.addValidator( new StringLengthValidator(
                                 "input is empty or too short", 1, 1000000, false));
                         text.setValidationVisible(false);
                     }
-                    if( cols[i][2].equalsIgnoreCase("Integer") ) {
+                    if( cols[i][3].equalsIgnoreCase("Integer") ) {
                         text.addValidator( new NullValidator(
                                 "can not be empty",false) );
 
@@ -146,8 +146,8 @@ public class TableEditWin extends Window {
                 /**
                  * Setting InputPrompts
                  */                
-                if( cols[i].length > 3 &&  cols[i][3] != null ) {
-                    text.setInputPrompt( cols[i][3] );
+                if( cols[i].length > 4 &&  cols[i][4] != null ) {
+                    text.setInputPrompt( cols[i][4] );
                 }
                 
                 form.addComponent(text);        

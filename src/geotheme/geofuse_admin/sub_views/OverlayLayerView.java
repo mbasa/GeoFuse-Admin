@@ -166,6 +166,14 @@ public class OverlayLayerView extends VerticalLayout implements View {
         baseTable.setVisibleColumns("name","rank","display","active","url",
                 "layers","minzoom");
         
+        baseTable.setColumnHeader( "name"   , rb.getString("COL_NAME") );
+        baseTable.setColumnHeader( "rank"   , rb.getString("COL_RANK") );
+        baseTable.setColumnHeader( "display", rb.getString("COL_DISPLAY") );
+        baseTable.setColumnHeader( "active" , rb.getString("COL_ACTIVE") );
+        baseTable.setColumnHeader( "url"    , rb.getString("COL_URL") );
+        baseTable.setColumnHeader( "layers" , rb.getString("COL_LAYERS") );
+        baseTable.setColumnHeader( "minzoom", rb.getString("COL_MINZOOM") );
+        
         baseTable.addItemClickListener( new ItemClickListener() {
             
             private static final long serialVersionUID = 1L;
@@ -283,14 +291,17 @@ public class OverlayLayerView extends VerticalLayout implements View {
             item.getItemProperty("display").setValue(false);
         }
 
+        /**
+         * { disp name,col name,col type,validation,input prompt }
+         */
         String cols[][] = {
-                {"Name","text","NotNull","ex: DRM Layer"},
-                {"Rank","text","Integer","ex: 1"},
-                {"Display","boolean",null,null},
-                {"Active","boolean",null,null},
-                {"URL","text","NotNull","ex: /geofuse/wms"},
-                {"Layers","text","NotNull","ex: drm:drmroad32"},
-                {"Minzoom","text","Integer","ex: 14"}
+                {rb.getString("COL_NAME"),"Name","text","NotNull","ex: DRM Layer"},
+                {rb.getString("COL_RANK"),"Rank","text","Integer","ex: 1"},
+                {rb.getString("COL_DISPLAY"),"Display","boolean",null,null},
+                {rb.getString("COL_ACTIVE"),"Active","boolean",null,null},
+                {rb.getString("COL_URL"),"URL","text","NotNull","ex: /geofuse/wms"},
+                {rb.getString("COL_LAYERS"),"Layers","text","NotNull","ex: drm:drmroad32"},
+                {rb.getString("COL_MINZOOM"),"Minzoom","text","Integer","ex: 14"}
         };
         
         TableEditWin blw = new TableEditWin();

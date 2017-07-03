@@ -146,6 +146,10 @@ public class UserInfView extends VerticalLayout implements View {
         baseTable.setVisibleColumns("username","password","role");
         baseTable.setSizeFull();
         
+        baseTable.setColumnHeader( "username", rb.getString("COL_USERNAME") );
+        baseTable.setColumnHeader( "password", rb.getString("COL_PASSWORD") );
+        baseTable.setColumnHeader( "role"    , rb.getString("COL_ROLE") );
+        
         baseTable.addItemClickListener( new ItemClickListener() {
             
             private static final long serialVersionUID = 1L;
@@ -261,11 +265,13 @@ public class UserInfView extends VerticalLayout implements View {
         if( item == null ) {
             item = baseTable.getItem( baseTable.addItem() );            
         }
-        
+        /**
+         * { disp name,col name,col type,validation,input prompt }
+         */
         String cols[][] = {
-                {"UserName","text",  "NotNull"},
-                {"Password","text",  "NotNull"},
-                {"Role"    ,"combo",  null,"admin,user"}
+                {rb.getString("COL_USERNAME"),"UserName","text",  "NotNull"},
+                {rb.getString("COL_PASSWORD"),"Password","text",  "NotNull"},
+                {rb.getString("COL_ROLE"),"Role" ,"combo", null,"admin,user"}
         };
         
         TableEditWin blw = new TableEditWin();
