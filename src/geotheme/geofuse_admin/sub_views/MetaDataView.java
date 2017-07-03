@@ -186,9 +186,6 @@ public class MetaDataView extends VerticalLayout implements View {
                                 LOGGER.debug("SqlContainer will be refreshed");
                                 sqlContainer.refresh();     
                             }
-                            else {
-                                LOGGER.debug("SqlContainer is null.");
-                            }
                         }
                         catch( Exception e ) {
                             LOGGER.error( e );
