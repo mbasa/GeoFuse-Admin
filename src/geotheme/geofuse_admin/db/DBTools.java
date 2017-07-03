@@ -7,10 +7,12 @@
  */
 package geotheme.geofuse_admin.db;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -166,4 +168,36 @@ public class DBTools {
     }
 
 
+    public static String callDelTemp( String param ) {
+        Logger LOGGER = LogManager.getLogger();
+        LOGGER.debug("In callDelTemp:{}",param);
+        
+        Connection con = null;
+        String retVal  = null;
+        
+        try {
+            con = ConnectionPoolHolder.getConnection();
+            
+            CallableStatement deltemp = con.prepareCall("{ ? = call deltemp( ? ) }");
+            deltemp.registerOutParameter(1, Types.VARCHAR);
+            deltemp.setString( 2, param );
+            deltemp.execute();
+            
+            retVal = deltemp.getString(1);
+            LOGGER.debug( retVal );
+            
+            con.commit();
+            deltemp.close();
+        }
+        catch( Exception e ) {
+            LOGGER.error( e );
+        }
+        finally {
+            if( con != null ) {
+                ConnectionPoolHolder.returnConnection(con);
+            }            
+        }
+        
+        return retVal;
+    }
 }
