@@ -8,6 +8,7 @@
 package geotheme.geofuse_admin.sub_views;
 
 
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
@@ -141,7 +142,7 @@ public class MetaDataView extends VerticalLayout implements View {
         multDel.addStyleName(ValoTheme.COMBOBOX_SMALL);
         
         Button mdelBtn = new Button( rb.getString("BTN.DEL") );
-        delBtn.addStyleName(ValoTheme.BUTTON_SMALL);
+        mdelBtn.addStyleName(ValoTheme.BUTTON_SMALL);
         
         HorizontalLayout form = new HorizontalLayout();
         form.addComponents(label,multDel,mdelBtn);
@@ -167,7 +168,8 @@ public class MetaDataView extends VerticalLayout implements View {
                 cw.setResizable(false);
                 cw.setWidth("400px");
                 cw.setHeight("230px");               
-                cw.init( "Delete Records Older than "+multDel.getValue(),false);
+                cw.init( MessageFormat.format(rb.getString("DEL_MULT_MESSAGE"), 
+                        multDel.getValue()),false);
                 
                 cw.ok.addClickListener(new ClickListener() {
 
@@ -286,7 +288,7 @@ public class MetaDataView extends VerticalLayout implements View {
                 cw.setResizable(false);
                 cw.setWidth("400px");
                 cw.setHeight("230px");               
-                cw.init( "Delete Selected Record?",false);
+                cw.init( rb.getString("DEL_MESSAGE"),false);
                 
                 cw.ok.addClickListener(new ClickListener() {
 

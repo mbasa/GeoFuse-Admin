@@ -252,7 +252,7 @@ public class BaseMapView extends VerticalLayout implements View {
                 cw.setResizable(false);
                 cw.setWidth("400px");
                 cw.setHeight("230px");               
-                cw.init( "Delete Selected Record?",false);
+                cw.init( rb.getString("DEL_MESSAGE"),false);
                 
                 cw.ok.addClickListener(new ClickListener() {
 
