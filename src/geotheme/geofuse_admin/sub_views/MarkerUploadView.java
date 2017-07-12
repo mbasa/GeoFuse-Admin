@@ -300,7 +300,6 @@ public class MarkerUploadView extends VerticalLayout implements View {
      */
     @Override
     public void enter(ViewChangeEvent event) {
-        // TODO 自動生成されたメソッド・スタブ
 
     }
 
