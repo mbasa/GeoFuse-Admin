@@ -16,7 +16,10 @@ import com.vaadin.ui.UI;
 public class Geofuse_adminUI extends UI {
 
 	@WebServlet(value = "/*", asyncSupported = true)
-	@VaadinServletConfiguration(productionMode = false, ui = Geofuse_adminUI.class)
+	@VaadinServletConfiguration(
+	        productionMode = false, 
+	        ui = Geofuse_adminUI.class,
+	        widgetset = "geotheme.geofuse_admin.ui.widgetset.Geofuse_adminWidgetset")
 	public static class Servlet extends VaadinServlet {
 	}
 

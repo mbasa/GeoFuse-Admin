@@ -14,6 +14,7 @@ import geotheme.geofuse_admin.sub_views.MapLinkerView;
 import geotheme.geofuse_admin.sub_views.MarkerUploadView;
 import geotheme.geofuse_admin.sub_views.MetaDataView;
 import geotheme.geofuse_admin.sub_views.OverlayLayerView;
+import geotheme.geofuse_admin.sub_views.StatisticsView;
 import geotheme.geofuse_admin.sub_views.UserInfView;
 
 import java.util.Arrays;
@@ -108,6 +109,7 @@ public class MainView extends HorizontalLayout {
         navigator.addView(UserInfView.NAME      ,UserInfView.class);
         navigator.addView(MapLinkerDataView.NAME,MapLinkerDataView.class);
         navigator.addView(InstallationView.NAME ,InstallationView.class);
+        navigator.addView(StatisticsView.NAME   ,StatisticsView.class);
         
         navigator.navigateTo(MapLinkerView.NAME);
         navigator.setErrorView(MapLinkerView.class);
@@ -147,7 +149,8 @@ public class MainView extends HorizontalLayout {
         menuItems.put( MarkerUploadView.NAME , rb.getString("MENU.MARKERSUPLOAD") );
         menuItems.put( UserInfView.NAME      , rb.getString("MENU.USERADMIN") );        
         menuItems.put( MapLinkerDataView.NAME, rb.getString("MENU.MAPLINKERDATA") );
-        menuItems.put( MetaDataView.NAME     , rb.getString("MENU.METADATA") );  
+        menuItems.put( MetaDataView.NAME     , rb.getString("MENU.METADATA") );
+        menuItems.put( StatisticsView.NAME   , rb.getString("MENU.STATISTICS") );
         menuItems.put( InstallationView.NAME , rb.getString("MENU.HELP") );  
         
         final Button buttons[] = new Button[menuItems.size()];
