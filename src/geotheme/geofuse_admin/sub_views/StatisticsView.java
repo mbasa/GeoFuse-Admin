@@ -198,11 +198,21 @@ public class StatisticsView extends VerticalLayout implements View {
     }
     
     private DCharts makeTypeGraph() {
-        DataSeries dataSeries = new DataSeries();
-        dataSeries.newSeries().add(rb.getString("PIE.POLYGON"),95);
-        dataSeries.newSeries().add(rb.getString("PIE.LINE"),29);
-        dataSeries.newSeries().add(rb.getString("PIE.POINT"),15);
+        String sql = "select "
+                + "count( case when layertype = 'polygon' then 1 end ) as polygon, "
+                + "count( case when layertype = 'line' then 1 end ) as line, "
+                + "count( case when layertype = 'point' then 1 end) as point "
+                + "from geofuse.metadata where ddate < now() and "
+                + "ddate >= now() - '12 months'::interval";
         
+        Object dataDB[] = DBTools.getSingleRecord( sql );
+        
+        DataSeries dataSeries = new DataSeries();
+
+        dataSeries.newSeries().add(rb.getString("PIE.POLYGON"),dataDB[0]);
+        dataSeries.newSeries().add(rb.getString("PIE.LINE")   ,dataDB[1]);
+        dataSeries.newSeries().add(rb.getString("PIE.POINT")  ,dataDB[2]);
+
         PieRenderer pieRenderer = new PieRenderer();
         pieRenderer.setShowDataLabels(true);
         pieRenderer.setFill( true );
@@ -227,6 +237,7 @@ public class StatisticsView extends VerticalLayout implements View {
         options.setSeriesDefaults(seriesDefaults);
         options.setLegend(legend);
         options.setHighlighter(hLighter);
+        //options.setSeriesColors("#CCAACC","#FFDDDD","#CCBBFF");
         
         DCharts dChart = new DCharts();
         dChart.setDataSeries(dataSeries);
