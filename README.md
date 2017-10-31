@@ -26,3 +26,10 @@ To Test
 ```
   mvn jetty:run
 ```
+
+* and use the following URL to access the application: 
+
+```
+http://localhost:8080/geofuse-admin
+```
+
