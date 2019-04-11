@@ -15,7 +15,7 @@ import com.vaadin.ui.UI;
 @Theme("geofuse_admin")
 public class Geofuse_adminUI extends UI {
 
-	@WebServlet(value = "/*", asyncSupported = true)
+	@WebServlet(value = {"/*","/VAADIN/*"}, asyncSupported = true)
 	@VaadinServletConfiguration(
 	        productionMode = false, 
 	        ui = Geofuse_adminUI.class,
